@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Friends of Mine</title>
+</head>
+<body>
+<h2>Liste des Activites</h2>
+<table class="tatable table-striped">
+    <tr>
+        <th>Titre</th>
+        <th>Descriptif</th>
+    </tr>
+    <tr th:each = "activite : ${activite}">
+        <td th:text="${activite.titre}"></td>
+        <td th:text="${activite.descriptif}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
