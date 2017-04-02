@@ -2,61 +2,92 @@ package friendsofmine.service;
 
 import friendsofmine.domain.Activite;
 import friendsofmine.domain.Utilisateur;
+import friendsofmine.repositories.ActiviteRepository;
+import friendsofmine.repositories.UtilisateurRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by SoF on 02/04/2017.
  */
 @Service
+@Transactional
 public class InitialisationService {
 
-    private ArrayList<Activite> activites = new ArrayList<>();
-    private ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+    @Autowired
+    private ActiviteRepository activiteRepository;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
+    private Utilisateur thom, mary;
+    private Activite taekwondo, randonnee, lindyhop;
 
     public void initDonnees(){
+        initUtilisateurs();
+        initActivites();
+    }
+
+    public void initUtilisateurs(){
         initThom();
         initMary();
+    }
+    public void initActivites(){
         initTaekwondo();
         initLindyHop();
         initRandonnee();
     }
 
     private void initThom() {
-        utilisateurs.add(new Utilisateur("Thom", "Thom", "thom@thom.com", "M"));
+        thom = new Utilisateur("Thom", "Thom", "thom@thom.com", "M");
+        utilisateurRepository.save(thom);
     }
 
     private void initMary() {
-        utilisateurs.add(new Utilisateur("Mary", "Mary", "mary@mary.com", "F"));
+        mary = new Utilisateur("Mary", "Mary", "mary@mary.com", "F");
+        utilisateurRepository.save(mary);
     }
 
     private void initTaekwondo() {
-        activites.add(new Activite("Taekwondo", "le dimanche soir"));
-
+        taekwondo = new Activite("Taekwondo", "le dimanche soir", thom);
+        activiteRepository.save(taekwondo);
     }
 
     private void initLindyHop() {
-        activites.add(new Activite("Lindy Hop", "le jeudi soir"));
+        lindyhop = new Activite("Lindy Hop", "le jeudi soir", thom);
+        activiteRepository.save(lindyhop);
     }
 
     private void initRandonnee() {
-        activites.add(new Activite("Randonnee", "le lundi matin"));
+        randonnee = new Activite("Randonnee", "le lundi matin", mary);
+        activiteRepository.save(randonnee);
     }
 
-    public ArrayList<Activite> getActivites() {
-        return activites;
+    public ActiviteRepository getActiviteRepository() {
+        return activiteRepository;
     }
 
-    public ArrayList<Utilisateur> getUtilisateurs() {
-        return utilisateurs;
+    public UtilisateurRepository getUtilisateurRepository() {
+        return utilisateurRepository;
     }
 
-    public void setActivites(ArrayList<Activite> activites) {
-        this.activites = activites;
+    public Utilisateur getThom() {
+        return thom;
     }
 
-    public void setUtilisateurs(ArrayList<Utilisateur> utilisateurs) {
-        this.utilisateurs = utilisateurs;
+    public Utilisateur getMary() {
+        return mary;
+    }
+
+    public Activite getTaekwondo() {
+        return taekwondo;
+    }
+
+    public Activite getRandonnee() {
+        return randonnee;
+    }
+
+    public Activite getLindyhop() {
+        return lindyhop;
     }
 }

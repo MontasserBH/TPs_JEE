@@ -3,17 +3,24 @@ package friendsofmine.domain;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.stereotype.Controller;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.SplittableRandom;
 
 /**
  * Created by SoF on 01/04/2017.
  */
-
+@Entity
 public class Utilisateur {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id ;
 
     @NotNull
     @Size(min = 1, max = 255)
@@ -32,6 +39,9 @@ public class Utilisateur {
     private String sexe;
 
     private Date dateNaissance;
+
+    @OneToMany(mappedBy = "responsable")
+    private Collection<Activite> activites = new ArrayList<Activite>();
 
     public Utilisateur(){
 
@@ -88,5 +98,23 @@ public class Utilisateur {
 
     public Date getDateNaissance() {
         return dateNaissance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Collection<Activite> getActivites() {
+        return activites;
+    }
+
+    public void addActivite(Activite activite){
+        if(!activites.contains(activite)){
+            activites.add(activite);
+        }
     }
 }
