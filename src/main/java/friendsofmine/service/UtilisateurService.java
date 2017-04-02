@@ -32,6 +32,10 @@ public class UtilisateurService {
         return utilisateurs;
     }
 
+    public void deleteUtilisateur(Long id){
+        utilisateurRepository.delete(id);
+    }
+
     public long countUtilisateur(){
         return utilisateurRepository.count();
     }

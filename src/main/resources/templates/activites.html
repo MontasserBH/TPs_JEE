@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Friends of Mine</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
+
 <body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
 <h2>Liste des Activites</h2>
-<table class="tatable table-striped">
+<table class="w3-table-all w3-hoverable">
     <tr>
         <th>Titre</th>
         <th>Descriptif</th>
     </tr>
-    <tr th:each = "activite : ${activite}">
+    <tr th:each= "activite : ${activite}">
         <td th:text="${activite.titre}"></td>
         <td th:text="${activite.descriptif}"></td>
     </tr>
