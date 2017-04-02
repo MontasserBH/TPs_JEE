@@ -19,6 +19,7 @@ public class Bootstrap {
     public void init(){
         try {
             this.initialisationService.initDonnees();
+            this.initialisationService.initInscriptions();
         }catch (Exception e) {
             e.printStackTrace();
         }

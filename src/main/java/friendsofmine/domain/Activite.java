@@ -1,5 +1,7 @@
 package friendsofmine.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,6 +23,7 @@ public class Activite {
     private String descriptif;
 
     @NotNull
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Utilisateur responsable;
 

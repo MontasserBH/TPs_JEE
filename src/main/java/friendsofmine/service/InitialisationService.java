@@ -1,8 +1,10 @@
 package friendsofmine.service;
 
 import friendsofmine.domain.Activite;
+import friendsofmine.domain.Inscription;
 import friendsofmine.domain.Utilisateur;
 import friendsofmine.repositories.ActiviteRepository;
+import friendsofmine.repositories.InscriptionRepository;
 import friendsofmine.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,23 +21,46 @@ public class InitialisationService {
     private ActiviteRepository activiteRepository;
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    @Autowired
+    private InscriptionRepository inscriptionRepository;
 
     private Utilisateur thom, mary;
     private Activite taekwondo, randonnee, lindyhop;
+    private Inscription maryOnTaekwondo,thomOnRandonnee,thomOnLindyhop;
 
     public void initDonnees(){
-        initUtilisateurs();
-        initActivites();
-    }
-
-    public void initUtilisateurs(){
         initThom();
         initMary();
-    }
-    public void initActivites(){
         initTaekwondo();
         initLindyHop();
         initRandonnee();
+    }
+
+    public void initInscriptions(){
+        initMaryOnTaekwondo();
+        initThomOnRandonnee();
+        initThomOnLindyhop();
+    }
+
+    public void initMaryOnTaekwondo(){
+        maryOnTaekwondo = new Inscription();
+        maryOnTaekwondo.setParticipant(mary);
+        maryOnTaekwondo.setActivite(taekwondo);
+        inscriptionRepository.save(maryOnTaekwondo);
+    }
+
+    public void initThomOnRandonnee(){
+        thomOnRandonnee = new Inscription();
+        thomOnRandonnee.setParticipant(thom);
+        thomOnRandonnee.setActivite(randonnee);
+        inscriptionRepository.save(thomOnRandonnee);
+    }
+
+    public void initThomOnLindyhop(){
+        thomOnLindyhop = new Inscription();
+        thomOnLindyhop.setParticipant(thom);
+        thomOnLindyhop.setActivite(lindyhop);
+        inscriptionRepository.save(thomOnLindyhop);
     }
 
     private void initThom() {
@@ -89,5 +114,21 @@ public class InitialisationService {
 
     public Activite getLindyhop() {
         return lindyhop;
+    }
+
+    public InscriptionRepository getInscriptionRepository() {
+        return inscriptionRepository;
+    }
+
+    public Inscription getMaryOnTaekwondo() {
+        return maryOnTaekwondo;
+    }
+
+    public Inscription getThomOnRandonnee() {
+        return thomOnRandonnee;
+    }
+
+    public Inscription getThomOnLindyhop() {
+        return thomOnLindyhop;
     }
 }
